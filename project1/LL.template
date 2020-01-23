@@ -1,0 +1,62 @@
+/*
+* AJ Stein
+* Ohio University CS3610 Project 1
+* 1-16-20
+* We are to write a program that takes some numbers from the command line, and then print them, add to them, delete them, or reverse the order
+*/
+
+using namespace std;
+#include <iostream>
+#include <cstdlib>
+
+// Writing the definitions for push front, pop front, reverse, print, and ~LinkedList, These are what they do:
+
+// Big Three
+//*********************************************
+template<class T>
+LinkedList<T>::~LinkedList(){
+    // Deconstructor
+    ListNode *rmptr;
+    while(head != NULL){
+	    rmptr = head;
+	    head = head -> next;
+        delete rmptr;
+    }
+}
+//*********************************************
+template<class T>
+void LinkedList<T>::push_front(T data){ 
+    // Enters a value in the front.
+        head = new ListNode(data); // makes node
+        head -> data = data; // sets data
+        head -> next = NULL;
+    
+}
+//*********************************************
+template<class T>
+void LinkedList<T>::pop_front(){  
+    // Checks for an empty list, if not deletes first value
+    if(head == NULL){
+        return;
+    }
+    else{
+        ListNode *rmptr = head;
+        head = head -> next;
+        delete head;
+    }
+}
+//*********************************************
+template<class T>
+void LinkedList<T>::print() const{
+    // Checks for an empty list:
+    if(head == NULL)
+        cout << "\nThere is nothing to print!" << endl;
+
+    // Goes through list and prints it out, doesn't like just using "head" so ive replaced it with cursor. 
+    ListNode *cursor = head;
+	while(cursor != NULL){
+		cout << "\n" << cursor -> data;
+        cout << endl;
+		cursor = cursor -> next;
+}
+}
