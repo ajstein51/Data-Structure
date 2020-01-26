@@ -55,6 +55,10 @@ int main(int argc, char** argv) {
       case 'd':
         list.pop_front();
         break;
+      
+      case 'r':
+        list.reverse();
+        break;
 //*********************************************
     } // end of switch
   } // end of while
