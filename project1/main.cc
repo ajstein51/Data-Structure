@@ -18,7 +18,6 @@ char menu(); // Menu for the user
 //*********************************************
 int main(int argc, char** argv) {
   LinkedList<int> list;
-
   cout << "Please do lower case only!";
 
   // Two variables for the users choices
@@ -41,7 +40,9 @@ int main(int argc, char** argv) {
 //*********************************************
       // Prints List
       case 'p':
+        cout << endl;
         list.print();
+        cout << endl;
         break;
 //*********************************************
       // Adds to front of list

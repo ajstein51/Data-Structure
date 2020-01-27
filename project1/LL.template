@@ -31,6 +31,7 @@ void LinkedList<T>::push_front(T data){
         head = new ListNode(data); // makes node
         head -> data = data; // sets data
         head -> next = NULL;
+        ///////////////////////////
     */
    	if(head == NULL){
 		head = new ListNode(data);
@@ -43,7 +44,17 @@ void LinkedList<T>::push_front(T data){
 		}
 		cursor -> next = new ListNode(data);
 		cursor -> next -> data = data;
-		}
+	}
+    ListNode *cursor = head;
+    ListNode *previous = NULL, *n = NULL;
+    while(cursor != NULL){
+        n = cursor -> next;
+        cursor -> next = previous;
+        previous = cursor;
+        cursor = n;
+    }
+    head = previous;
+    
 
     
 }
@@ -70,8 +81,8 @@ void LinkedList<T>::print() const{
     // Goes through list and prints it out, doesn't like just using "head" so ive replaced it with cursor. 
     ListNode *cursor = head;
 	while(cursor != NULL){
-		cout << "\n" << cursor -> data;
-        cout << endl;
+		cout << cursor -> data;
+        cout << " ";
 		cursor = cursor -> next;
     }
 }
