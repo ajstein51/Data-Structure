@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
   }
 
 	KnightsTour knight(5);
-
+  
   int num_tours = knight.generate(row, col);
 	cout << "Number of tours: " << num_tours << endl;
 
