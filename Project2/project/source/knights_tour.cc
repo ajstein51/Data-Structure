@@ -43,52 +43,36 @@ void KnightsTour::get_moves(int row, int col, int row_moves[], int col_moves[], 
   // Checks all possible moves (8) with the isvalid function, then proceeds to place the number there
   int i = 0;
 //-----------------------------------------------------------
-  if(isvalid(row + 2, col + 1) == true){
-    row_moves[i] = row + 2, col_moves[i] = col + 1;
-    num_moves++;
-    i++;
+  if(isvalid(row - 1, col + 2) == true){ // 2 1
+    row_moves[i] = row - 1, col_moves[i] = col + 2, num_moves++, i++;
   }
 //-----------------------------------------------------------
-  if(isvalid(row + 1, col + 2) == true){
-    row_moves[i] = row + 1, col_moves[i] = col + 2;
-    num_moves++;
-    i++;
+  if(isvalid(row + 1, col + 2) == true){ // 1 2
+    row_moves[i] = row + 1, col_moves[i] = col + 2, num_moves++, i++;
   }
 //-----------------------------------------------------------
-  if(isvalid(row - 1, col + 2) == true){
-    row_moves[i] = row - 1, col_moves[i] = col + 2;
-    num_moves++;
-    i++;
+  if(isvalid(row + 2, col + 1) == true){ // -1 2
+    row_moves[i] = row + 2, col_moves[i] = col + 1, num_moves++, i++;
   }
 //-----------------------------------------------------------
-  if(isvalid(row - 2, col + 1) == true){
-    row_moves[i] = row - 2, col_moves[i] = col + 1;
-    num_moves++;
-    i++;
+  if(isvalid(row + 2, col - 1) == true){ // -2 1
+    row_moves[i] = row + 2, col_moves[i] = col - 1, num_moves++, i++;
   }
 //-----------------------------------------------------------
-  if(isvalid(row - 2, col - 1) == true){
-    row_moves[i] = row - 2, col_moves[i] = col - 1;
-    num_moves++;
-    i++;
+  if(isvalid(row + 1, col - 2) == true){ // -2 -1
+    row_moves[i] = row + 1, col_moves[i] = col - 2, num_moves++, i++;
   }
 //-----------------------------------------------------------
-  if(isvalid(row - 1, col - 2) == true){
-    row_moves[i] = row - 1, col_moves[i] = col - 2;
-    num_moves++;
-    i++;
+  if(isvalid(row - 1, col - 2) == true){ // -1 -2
+    row_moves[i] = row - 1, col_moves[i] = col - 2, num_moves++, i++;
   }
 //-----------------------------------------------------------
-  if(isvalid(row + 1, col - 2) == true){
-    row_moves[i] = row + 1, col_moves[i] = col - 2;
-    num_moves++;
-    i++;
+  if(isvalid(row - 2, col - 1) == true){ // 1 -2
+    row_moves[i] = row - 2, col_moves[i] = col - 1, num_moves++, i++;
   }
 //-----------------------------------------------------------
-  if(isvalid(row + 2, col - 1) == true){
-    row_moves[i] = row + 2, col_moves[i] = col - 1;
-    num_moves++;
-    i++;
+  if(isvalid(row - 2, col + 1) == true){ // 2 -1 
+    row_moves[i] = row - 2, col_moves[i] = col + 1, num_moves++, i++;
   }
 //-----------------------------------------------------------
 } // end of function
@@ -100,14 +84,10 @@ void KnightsTour::get_moves(int row, int col, int row_moves[], int col_moves[], 
 //                      Stored in board at position
 //                      row, col.
 //     int& num_tours - Total number of tours found.
-
 void KnightsTour::move(int row, int col, int& m, int& num_tours){ 
   // Starting Values:
-  m++;
-  board[row][col] = m;
-  int row_moves[8]; //= {  2, 1, -1, -2, -2, -1,  1,  2 };  These are the only possible moves
-  int col_moves[8]; //= {  1, 2,  2,  1, -1, -2, -2, -1 }; 
-  int num_moves = 0;
+  m++, board[row][col] = m;
+  int row_moves[8], col_moves[8], num_moves = 0;
   get_moves(row, col, row_moves, col_moves, num_moves);
   
   // If no moves left:
@@ -121,8 +101,7 @@ void KnightsTour::move(int row, int col, int& m, int& num_tours){
   }
   
   // Backtrack, decrements 'm' and undo the last move (set equal to 0):
-  m--;
-  board[row][col] = 0;
+  m--, board[row][col] = 0;
 }
 
 bool KnightsTour::isvalid(int x, int y){
