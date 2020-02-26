@@ -15,29 +15,16 @@ struct HeapNode {
 template <typename T>
 class MinHeap {
 public:
-  MinHeap() {}
+  // default constructor and destructor
+  MinHeap() {}          
   ~MinHeap() {}
 
-  void insert(const T data, const int key);
-  T extract_min();
-  T peek() const {T data; return data;}; // need to implement this function
-
-  int size() const { return 0;};         // need to implement this function
+  void insert(const T data, const int key);    // Need to do
+  T extract_min();                             // Need to do
+  T peek() const;                              // Should be functional                 
+  int size() const                             // Returns the size of the vector/heap, should be functional
+    {return heap.size();}                                    
 
 private:
-  vector<HeapNode<T> > heap;
+  vector<HeapNode<T> > heap;                   // KEEP IN MIND ITS A VECTOR
 };
-
-
-template <typename T>
-void MinHeap<T>::insert(const T data, const int key) {  // need to implement this function
-
-}
-
-template <typename T>
-T MinHeap<T>::extract_min() {                          // need to implement this function
-
-  T data;
-  
-   return data;
-}
