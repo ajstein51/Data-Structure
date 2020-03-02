@@ -1,6 +1,5 @@
 #ifndef HUFFMAN_TREE_H
 #define HUFFMAN_TREE_H
-
 #include <string>
 #include <map>
 using namespace std;

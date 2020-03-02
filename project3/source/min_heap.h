@@ -16,8 +16,8 @@ template <typename T>
 class MinHeap {
 public:
   // default constructor and destructor
-  MinHeap() {}          
-  ~MinHeap() {}
+  MinHeap();       
+  ~MinHeap();
 
   void insert(const T data, const int key);    // Need to do
   T extract_min();                             // Need to do
@@ -28,3 +28,5 @@ public:
 private:
   vector<HeapNode<T> > heap;                   // KEEP IN MIND ITS A VECTOR
 };
+
+#include "min_heap.template"

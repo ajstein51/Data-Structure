@@ -1,10 +1,16 @@
-#include "huffman_tree.h"
-#include "min_heap.h"
 #include <vector>
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
+//*******************************************************************************************
+template <typename T>
+MinHeap<T>::MinHeap(){
+}
+//*******************************************************************************************
+template <typename T>
+MinHeap<T>::~MinHeap(){
+}
 //*******************************************************************************************
 // Returns the min element, since we are doing a min heap the min element should always be the first element. (*doesn't remove*)
 template <typename T>
@@ -14,39 +20,38 @@ T MinHeap<T>::peek()const{
     exit(1);
   } 
   else
-    return heap[0]; // first elements, also the lowest/min
+    return heap[0].data; // first elements, also the lowest/min
 }
 //*******************************************************************************************
 // Personal Note: act like its a linked list?
 template <typename T>
 void MinHeap<T>::insert(const T data, const int key) {  // need to implement this function
   if(heap.empty())
-    // If the heap is empty or otherwise this is the first node.
+    // If the heap is empty or otherwise this is the first node.(make new node)
     heap.push_back(HeapNode<T>(data, key));
   
   else{
-    heap.push_back(HeapNode<T>(data, key));
-    size_t i = heap.size() - 1;
-    while(i != 0){
-      i--;
-      int left = 2 * i + 1, right = 2 * i + 2;
-      if(left > heap.size())
-        return;
-      int min = i;
-      if(heap[i] > heap[left])
-        min = left;
-      if(heap.size() > heap[i] && heap[min] > heap[right])
-        min = right;
-      if(min != i)
-        swap(heap[i], heap[min]);
+    int i = heap.size() - 1; //find position of last element
+		while(i != 0 && heap[i-1/2].key > heap[i].key){ //as long as i is not 0 and the parent of i is greater than i
+			swap(heap[i], heap[i-1/2]); //swap
+			i = i-1/2; //update i
     }
   }
 }
 //*******************************************************************************************
 template <typename T>
 T MinHeap<T>::extract_min() {                          // need to implement this function
-
   T data;
+  if(heap.empty()){
+    cout << "\nThe heap is empty!" << endl;
+    exit(1);
+  }
+  else{
+    int last = heap.size() - 1;
+    swap(heap[0], heap[last]);
+    data = heap[last].data;
+    heap.pop_back();
+  }
   
    return data;
 }
