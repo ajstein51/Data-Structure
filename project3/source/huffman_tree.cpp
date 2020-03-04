@@ -91,16 +91,15 @@ void HuffmanTree::construct(const string message) {
 
     parent->left = left;
     parent->right = right;
-
+    
     heap.insert(parent, parent->frequency);
   }
 
   // Get root of huffman tree. e.g. {*:11}
-// makes it here then stops---------------------------------------
   this->root = heap.peek();
 }
 
-void HuffmanTree::print() const {   // need to implement this function 
+void HuffmanTree::print() const {   
   // Print the Huffman encoding of this->message.
   // Append 0 to a character's encoding if moving left in Huffman tree.
   // Append 1 to a character's encoding if moving right in Huffman tree.
@@ -109,27 +108,29 @@ void HuffmanTree::print() const {   // need to implement this function
   // character searches from there.
 
   // Also, feel free to add a print helper function.
-  string hold = this -> message;
-  HuffmanNode* current = this -> root;
-  while(current -> left != NULL && current -> right != NULL){
-      if(current -> left){
-        hold.push_back('0');
-        current -> left;
-      }
-      if(current -> right){
-        hold.push_back('1');
-        current -> right;
-      }
-      if(!hold.empty())
-        hold.erase(hold.size() - 1);
-  }
-  //for(string i = hold.begin(); i != hold.end(); i++){ // will be the actual print
-    
-  //}
-
+  string hold = "";
+  // string = this -> message
+  map<char, string> map;
+  encode(this -> root, hold, map);
+  for(auto it = map.cbegin(); it != map.cend(); ++it){
+    cout << it -> first << " " << it -> second << " " << "\n";
+}
+  
 }
 
+void HuffmanTree::encode(const HuffmanNode* current, string &hold, map<char, string> &map)const{
+  if(current -> left){
+    hold.push_back('0');
+    encode(current -> left, hold, map);
+    hold.pop_back();
+  }
+  if(current -> right){
+    hold.push_back('1');
+    encode(current -> right, hold, map);
+    hold.pop_back();
+  }
+  
+}
 /**
-  - by the time it gets to peek() it is empty.
   - Recursive helper function to add to map
 */

@@ -6,10 +6,12 @@ using namespace std;
 //*******************************************************************************************
 template <typename T>
 MinHeap<T>::MinHeap(){
+  // empty
 }
 //*******************************************************************************************
 template <typename T>
 MinHeap<T>::~MinHeap(){
+  // empty
 }
 //*******************************************************************************************
 // Returns the min element, since we are doing a min heap the min element should always be the first element. (*doesn't remove*)
@@ -25,34 +27,66 @@ T MinHeap<T>::peek()const{
 //*******************************************************************************************
 // Personal Note: act like its a linked list?
 template <typename T>
-void MinHeap<T>::insert(const T data, const int key) {  // need to implement this function
-  if(heap.empty())
-    // If the heap is empty or otherwise this is the first node.(make new node)
-    heap.push_back(HeapNode<T>(data, key));
-  
+void MinHeap<T>::insert(const T data, const int key) {  
+  if(heap.empty()) // If the heap is empty or otherwise this is the first node.(make new node)
+    heap.push_back(HeapNode<T>(data, key)); 
   else{
-    int i = heap.size() - 1; //find position of last element
-		while(i != 0 && heap[i-1/2].key > heap[i].key){ //as long as i is not 0 and the parent of i is greater than i
-			swap(heap[i], heap[i-1/2]); //swap
-			i = i-1/2; //update i
+    int i = heap.size() - 1;
+		while(i != 0 && heap[(i - 1) / 2].key > heap[i].key){  // compare the root to not the root
+			swap(heap[i], heap[(i - 1) / 2]); 
+			i = (i - 1) / 2; 
     }
   }
 }
 //*******************************************************************************************
 template <typename T>
-T MinHeap<T>::extract_min() {                          // need to implement this function
-  T data;
+T MinHeap<T>::extract_min() {      
+  T data;                    
   if(heap.empty()){
     cout << "\nThe heap is empty!" << endl;
     exit(1);
   }
   else{
-    int last = heap.size() - 1;
-    swap(heap[0], heap[last]);
-    data = heap[last].data;
-    heap.pop_back();
+    int i = 0, tmp = heap.size() - 1;
+    data = heap[0].data;
+    swap(heap[0], heap[tmp]);
+    heap.pop_back(); // pop_back removes the last element in the vector
+    while(i < heap.size()){
+      int left = (2 * i) + 1, right = (2 * i) + 2;
+      // Checks to see if i (starting value of 0) is already the smallest
+      if(heap[i].key <= heap[left].key && heap[i].key <= heap[right].key) 
+        break;
+      else if(heap[left].key == heap[right].key){ // checks if left and right equal then chooses left
+        swap(heap[i], heap[left]);
+        i = left;
+      } 
+      else if(heap[left].key <= heap[right].key){ // Checks if left is smaller than right
+        swap(heap[i].key, heap[left].key);
+        i = left;
+      }
+      else{
+        swap(heap[i].key, heap[right].key);       // Swaps with right cause after all the checks it should be the smallest
+        i = right;
+      }
+      // If it has either left or right, only check right
+      if(heap[left] ){
+        if(heap[i].key <= heap[right].key)
+          break;
+        else{
+          swap(heap[i], heap[right]);
+          i = right;
+        }
+      }
+      else if(heap[right] ){
+        if(heap[i].key <= heap[left].key)
+          break;
+        else{
+          swap(heap[i], heap[left]);
+          i = left;
+        }
+      }
+    }
+    return data;  
   }
-  
-   return data;
 }
 //*******************************************************************************************
