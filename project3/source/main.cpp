@@ -1,4 +1,10 @@
+/** 
+ * AJ Stein
+ * Data Structure
+ * March 4, 2020
+*/
 #include <iostream>
+#include <string>
 #include "huffman_tree.h"
 #include "min_heap.h"
 using namespace std;
@@ -26,7 +32,6 @@ int main(int argc, char** argv) {
     t.print();
     t.destruct();
   }
-  
   return 0;
 }
 

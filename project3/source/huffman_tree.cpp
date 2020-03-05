@@ -108,13 +108,13 @@ void HuffmanTree::print() const {
   // character searches from there.
 
   // Also, feel free to add a print helper function.
-  string hold = "";
-  // string = this -> message
+
+  string hold = "", pmessage = this -> message;
   map<char, string> map;
   encode(this -> root, hold, map);
-  for(auto it = map.cbegin(); it != map.cend(); ++it){
+  for(auto it = map.cbegin(); it != map.cend(); ++it)
     cout << it -> first << " " << it -> second << " " << "\n";
-}
+  
   
 }
 
@@ -129,8 +129,7 @@ void HuffmanTree::encode(const HuffmanNode* current, string &hold, map<char, str
     encode(current -> right, hold, map);
     hold.pop_back();
   }
+  map.insert();
   
 }
-/**
-  - Recursive helper function to add to map
-*/
+

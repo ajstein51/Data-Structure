@@ -14,7 +14,7 @@ MinHeap<T>::~MinHeap(){
   // empty
 }
 //*******************************************************************************************
-// Returns the min element, since we are doing a min heap the min element should always be the first element. (*doesn't remove*)
+// Returns the min element, since we are doing a min heap the min element should always be the first element. 
 template <typename T>
 T MinHeap<T>::peek()const{
   if(heap.empty()){
@@ -22,19 +22,17 @@ T MinHeap<T>::peek()const{
     exit(1);
   } 
   else
-    return heap[0].data; // first elements, also the lowest/min
+    return heap[0].data;                                                     // first elements, also the lowest/min
 }
 //*******************************************************************************************
-// Personal Note: act like its a linked list?
 template <typename T>
 void MinHeap<T>::insert(const T data, const int key) {  
-  if(heap.empty()) // If the heap is empty or otherwise this is the first node.(make new node)
+  if(heap.empty())                                                           // If the heap is empty or otherwise this is the first node.(make new node)
     heap.push_back(HeapNode<T>(data, key)); 
   else{
-    int i = heap.size() - 1;
-		while(i != 0 && heap[(i - 1) / 2].key > heap[i].key){  // compare the root to not the root
-			swap(heap[i], heap[(i - 1) / 2]); 
-			i = (i - 1) / 2; 
+    for(int i = heap.size() - 1; i != 0; i = (i - 1) / 2){
+      if(heap[(i - 1) / 2].key > heap[i].key)
+        swap(heap[i], heap[(i - 1) / 2]);
     }
   }
 }
@@ -48,28 +46,27 @@ T MinHeap<T>::extract_min() {
   }
   else{
     int i = 0, tmp = heap.size() - 1;
-    data = heap[0].data;
     swap(heap[0], heap[tmp]);
-    heap.pop_back(); // pop_back removes the last element in the vector
-    while(i < heap.size()){
+    data = heap[tmp].data;
+    heap.pop_back();                                                        // pop_back removes the last element in the vector
+    while(i <= heap.size()){
       int left = (2 * i) + 1, right = (2 * i) + 2;
-      // Checks to see if i (starting value of 0) is already the smallest
-      if(heap[i].key <= heap[left].key && heap[i].key <= heap[right].key) 
+      if(heap[i].key <= heap[left].key && heap[i].key <= heap[right].key)  // Checks to see if i (starting value of 0) is already the smallest
         break;
-      else if(heap[left].key == heap[right].key){ // checks if left and right equal then chooses left
+      else if(heap[left].key == heap[right].key){                          // checks if left and right equal then chooses left
         swap(heap[i], heap[left]);
         i = left;
       } 
-      else if(heap[left].key <= heap[right].key){ // Checks if left is smaller than right
+      else if(heap[left].key <= heap[right].key){                          // Checks if left is smaller than right
         swap(heap[i].key, heap[left].key);
         i = left;
       }
       else{
-        swap(heap[i].key, heap[right].key);       // Swaps with right cause after all the checks it should be the smallest
+        swap(heap[i].key, heap[right].key);                                // Swaps with right cause after all the checks it should be the smallest
         i = right;
       }
-      // If it has either left or right, only check right
-      if(heap[left] ){
+      int hright = heap.size();                                            // If it has either left or right, only check right
+      if(heap[right] <= heap[hright]){
         if(heap[i].key <= heap[right].key)
           break;
         else{
@@ -77,13 +74,9 @@ T MinHeap<T>::extract_min() {
           i = right;
         }
       }
-      else if(heap[right] ){
-        if(heap[i].key <= heap[left].key)
-          break;
-        else{
-          swap(heap[i], heap[left]);
-          i = left;
-        }
+      else{
+        swap(heap[i], heap[left]);
+        i = left;
       }
     }
     return data;  
