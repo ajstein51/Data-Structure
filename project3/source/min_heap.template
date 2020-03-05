@@ -5,13 +5,13 @@ using namespace std;
 
 //*******************************************************************************************
 template <typename T>
-MinHeap<T>::MinHeap(){
-  // empty
+MinHeap<T>::MinHeap(){                                                        // Empty
+  
 }
 //*******************************************************************************************
 template <typename T>
-MinHeap<T>::~MinHeap(){
-  // empty
+MinHeap<T>::~MinHeap(){                                                       // Empty
+ 
 }
 //*******************************************************************************************
 // Returns the min element, since we are doing a min heap the min element should always be the first element. 
@@ -30,6 +30,7 @@ void MinHeap<T>::insert(const T data, const int key) {
   if(heap.empty())                                                           // If the heap is empty or otherwise this is the first node.(make new node)
     heap.push_back(HeapNode<T>(data, key)); 
   else{
+    heap.push_back(HeapNode<T>(data, key));
     for(int i = heap.size() - 1; i != 0; i = (i - 1) / 2){
       if(heap[(i - 1) / 2].key > heap[i].key)
         swap(heap[i], heap[(i - 1) / 2]);
@@ -45,9 +46,9 @@ T MinHeap<T>::extract_min() {
     exit(1);
   }
   else{
-    int i = 0, tmp = heap.size() - 1;
+    int i = 0, tmp = heap.size() - 1;                                       // I is for the sentinal loop (while loop below), tmp isnt quite needed but looks cleaner
     swap(heap[0], heap[tmp]);
-    data = heap[tmp].data;
+    data = heap[tmp].data;                                                  // data is equaling the min value to be returned later
     heap.pop_back();                                                        // pop_back removes the last element in the vector
     while(i <= heap.size()){
       int left = (2 * i) + 1, right = (2 * i) + 2;
@@ -65,8 +66,8 @@ T MinHeap<T>::extract_min() {
         swap(heap[i].key, heap[right].key);                                // Swaps with right cause after all the checks it should be the smallest
         i = right;
       }
-      int hright = heap.size();                                            // If it has either left or right, only check right
-      if(heap[right] <= heap[hright]){
+      int has = heap.size();                                               // If it has either left or right, only need to check right
+      if(heap[right] <= heap[has]){
         if(heap[i].key <= heap[right].key)
           break;
         else{
@@ -75,8 +76,8 @@ T MinHeap<T>::extract_min() {
         }
       }
       else{
-        swap(heap[i], heap[left]);
-        i = left;
+          swap(heap[i], heap[left]);
+          i = left;
       }
     }
     return data;  

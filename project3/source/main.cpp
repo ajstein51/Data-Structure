@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
     t.print();
     t.destruct();
   }
-  return 0;
+  
 }
 
 /**
