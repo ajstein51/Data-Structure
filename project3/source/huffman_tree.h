@@ -28,7 +28,7 @@ class HuffmanTree {
 public:
   HuffmanTree() : root(NULL), message("") {}
   ~HuffmanTree() {delete this->root;}
-  void encode(const HuffmanNode* current, string &hold, map<char, string> &map)const;
+  void encode(const HuffmanNode* current, string hold, map<char, string> &map)const;
 
   void construct(const string message);
   void destruct() {delete this->root; this->root=NULL; message="";}
