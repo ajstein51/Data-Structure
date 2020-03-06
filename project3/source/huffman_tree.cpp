@@ -127,7 +127,6 @@ void HuffmanTree::print() const {
  * To write the map: 
   for(auto it = map.cbegin(); it != map.cend(); ++it)                                                     // printing element of the map
     cout << it -> first << it -> second << " ";
- *  
  */
 
 void HuffmanTree::encode(const HuffmanNode* current, string hold, map<char, string> &map)const{
@@ -135,10 +134,9 @@ void HuffmanTree::encode(const HuffmanNode* current, string hold, map<char, stri
   if(current == NULL)
     return;
   if(current -> left == NULL && current -> right == NULL)                                                 // If its a leaf
-    map.insert(pair<char, string>(current -> character, hold));
+    map.insert(pair<char, string>(current -> character, hold));                                           // This is the same as ({current -> character, hold})
   else{
     encode(current -> left, hold + "0", map);                                                             // Append 0
     encode(current -> right, hold + "1", map);                                                            // Append 1
   }
-
 }       

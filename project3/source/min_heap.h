@@ -19,10 +19,10 @@ public:
   MinHeap();       
   ~MinHeap();
 
-  void insert(const T data, const int key);    // Need to do
-  T extract_min();                             // Need to do
-  T peek() const;                              // Should be functional                 
-  int size() const                             // Returns the size of the vector/heap, should be functional
+  void insert(const T data, const int key);    
+  T extract_min();                             
+  T peek() const;                                            
+  int size() const                             
     {return heap.size();}                                    
 
 private:

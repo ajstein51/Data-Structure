@@ -11,13 +11,13 @@ using namespace std;
 /**
  * Timing Analysis:
  * With Minheap:
- *  Heap have O(nLogN) time. Building the heap takes O(n) time
+ *  Heap have O(nLogN) time. 
  *  There is (2 * n) - 1 nodes in the tree
  * 
  * Without Minheap:
- *  searching for the smallest element will be linear (so n time)
+ *  will have linear time of O(n)
  *  still have (2 * n) - 1 nodes 
- *  building the tree will take O(n^2)
+ *  
  *  (at least this is what the powerpoint says)
  */ 
 int main(int argc, char** argv) {
@@ -43,7 +43,6 @@ int main(int argc, char** argv) {
     t.print();
     t.destruct();
   }
-  
 }
 
 /**
