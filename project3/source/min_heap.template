@@ -37,12 +37,12 @@ void MinHeap<T>::insert(const T data, const int key) {
       parent = (i - 1) / 2;
     else
       parent = ((i - 2) / 2);
-    for(; i > 0; i = parent){                   // (i * 2) / 2 is the parent
+    for(; i > 0; i = parent){                                               // (i * 2) / 2 is the parent
       if(heap[parent].key > heap[i].key)
         swap(heap[i], heap[parent]);
       else
         break;
-      if(i % 2 != 0)
+      if(i % 2 != 0)                                                       // even or odd
         parent = (i - 1) / 2;
       else
         parent = ((i - 2) / 2);
@@ -71,18 +71,18 @@ T MinHeap<T>::extract_min() {
           swap(heap[i], heap[left]);
         return data;
       }
-      if(heap[i].key < heap[left].key && heap[i].key < heap[right].key)  // Checks to see if i (starting value of 0) is already the smallest
+      if(heap[i].key <= heap[left].key && heap[i].key <= heap[right].key)  // Checks to see if i (starting value of 0) is already the smallest
         break;
       else if(heap[left].key == heap[right].key){                          // checks if left and right equal then chooses left
         swap(heap[i], heap[left]);
         i = left;
       } 
-      else if(heap[left].key < heap[right].key){                          // Checks if left is smaller than right
+      else if(heap[left].key <= heap[right].key){                          // Checks if left is smaller than right
         swap(heap[i], heap[left]);
         i = left;
       }
       else{
-        swap(heap[i], heap[right]);                                // Swaps with right cause after all the checks it should be the smallest
+        swap(heap[i], heap[right]);                                        // Swaps with right cause after all the checks it should be the smallest
         i = right;
       }
     }

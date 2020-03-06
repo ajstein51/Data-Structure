@@ -8,7 +8,18 @@
 #include "huffman_tree.h"
 #include "min_heap.h"
 using namespace std;
-
+/**
+ * Timing Analysis:
+ * With Minheap:
+ *  Heap have O(nLogN) time. Building the heap takes O(n) time
+ *  There is (2 * n) - 1 nodes in the tree
+ * 
+ * Without Minheap:
+ *  searching for the smallest element will be linear (so n time)
+ *  still have (2 * n) - 1 nodes 
+ *  building the tree will take O(n^2)
+ *  (at least this is what the powerpoint says)
+ */ 
 int main(int argc, char** argv) {
   // Create a HuffmanTree object and read the input messages into the
   // HuffmanTree construct function. Next, print the encoded message.

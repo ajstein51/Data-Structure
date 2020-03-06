@@ -109,7 +109,6 @@ void HuffmanTree::print() const {
 
   // Also, feel free to add a print helper function.
 
-  string hold = "";
   map<char, string> map;                                                                                // maps work like: <key, element>
 
   encode(root, "", map);
@@ -118,42 +117,28 @@ void HuffmanTree::print() const {
   for(int i = 0; i < message.size(); i++){
     ch = message[i];
     cout << map[ch] << " ";
-  }// 11 00 11 10 10 011 010
-  // 010 011 10 10 00 1100 1101 00 1110 10 1111
-  // 011 10 11 11 010 00 10
-  for(auto it = map.cbegin(); it != map.cend(); ++it)                                                     // printing element of the map
-    cout << it -> first << it -> second << " ";
-  
+  }
   cout << endl;
 }
+/**
+ * opossum: 11 00 11 10 10 011 010
+ * hello world: 010 011 10 10 00 1100 1101 00 1110 10 1111
+ * message: 011 10 11 11 010 00 10
+ * To write the map: 
+  for(auto it = map.cbegin(); it != map.cend(); ++it)                                                     // printing element of the map
+    cout << it -> first << it -> second << " ";
+ *  
+ */
 
 void HuffmanTree::encode(const HuffmanNode* current, string hold, map<char, string> &map)const{
-  /*
-  if(current -> left == NULL){
-    hold.push_back('0');                                                                                // appends 0
-    encode(current -> left, hold, map);
-    hold.pop_back();
-  }
-  if(current -> right){
-    hold.push_back('1');                                                                                // appends 1
-    encode(current -> right, hold, map);
-    hold.pop_back();
-  }
-  if(current -> right == NULL && current -> left == NULL)                                               // at leaf 
-    map.insert(pair<char, string>(current -> character, hold));                                                     // curren -> character is the letter, hold is the number
-  */
+  
   if(current == NULL)
     return;
-  if(current -> left == NULL && current -> right == NULL)
+  if(current -> left == NULL && current -> right == NULL)                                                 // If its a leaf
     map.insert(pair<char, string>(current -> character, hold));
   else{
-    encode(current -> left, hold + "0", map);
-    encode(current -> right, hold + "1", map);
+    encode(current -> left, hold + "0", map);                                                             // Append 0
+    encode(current -> right, hold + "1", map);                                                            // Append 1
   }
 
-}       // pair<char, string>(current -> character, hold)
-/**
- * changed:
- * insert({current -> character, hold})
- * for loop has cbegin and cend now
- */
+}       
