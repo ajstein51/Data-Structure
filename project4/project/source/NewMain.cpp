@@ -10,7 +10,6 @@ struct nodestruct{
 int partition(vector<int>& list, int first, int last) {
   // The pivot should be the median of the
   // first, middle, and last elements.
-cout << "TESTT";
   // Initializing middle
   int mid = first + (last - first) / 2;
 //---------------------------------------------
@@ -36,33 +35,25 @@ cout << "TESTT";
 void quicksort(vector<int>& list, int first, int last){ 
   if(first < last)
     partition(list, first, last);
-  /*
-  if(first == last)
-    return;
-  else{
-    int t = partition(list, first, last);
-    quicksort(list, first, t - 1);
-    quicksort(list, t + 1, last);
-  } */ 
+  
 }
 //---------------------------------------------------------------------------------
 void multiway_merge(vector<vector<int> >& input_lists, vector<int>& output_list){
   priority_queue<nodestruct, vector<nodestruct>, greater<nodestruct> > MinHeap; 
   nodestruct node;
-  
+//---------------------------------------------
   for(int i = 0; i < input_lists.size(); i++){
     node.e = input_lists[i][0];
     node.i = i, node.j = 1;
     MinHeap.push(node);
   }
-
+//---------------------------------------------
   for(int i = 0; i < (input_lists.size() * input_lists[0].size()); i++){
     nodestruct root = MinHeap.top();
     MinHeap.pop();
     if(root.j + 1 < input_lists[root.i][root.j]){
       node.e = input_lists[root.i][root.j];
-      node.i = root.i;
-      node.j = root.j + 1;
+      node.i = root.i, node.j = root.j + 1;
       MinHeap.push(node);
     }
     output_list[i] = root.e;
@@ -79,11 +70,11 @@ int main(int argc, char** argv) {
       cin >> input_lists[i][j];
     }
   }
-  cout << "HELP";
+  
   // Quicksort k sublists
   for (int i = 0; i < input_lists.size(); ++i)
     quicksort(input_lists[i], 0, m-1); // breaking here
-  cout << "HERE";
+
   // Merge n input sublists into one sorted list
   vector<int> output_list(n * m);
   multiway_merge(input_lists, output_list); 
@@ -95,6 +86,8 @@ int main(int argc, char** argv) {
 }
 
 /**
- * Note:
- *     - There are a bunch of zeros being inserted
- */
+ * Correct Output:
+ *  0 1 3 4 22 23 28 41 42 49 58 79 83 100 222 422 425 444 599 934
+ * 
+ *  Seems to be good up until 83
+*/
